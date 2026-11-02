@@ -38,8 +38,7 @@
 #define CAN_ID_STEERING_COMMAND  0x340U
 #define CAN_ID_SPEED_COMMAND     0x341U
 
-/* Visual CAN test period. Restore to 20U for the final ADAS integration. */
-#define CAN_SENSOR_PERIOD_MS     5000U
+#define CAN_SENSOR_PERIOD_MS     20U
 #define CAN_COMMAND_TIMEOUT_MS   100U
 #define CAN_MAX_DATA_LENGTH      8U
 #define TWO_PI_F                 6.28318530718f
@@ -325,9 +324,10 @@ static void Gateway_CAN_TransmitSensors(uint32_t now)
   sim_steering_angle_deg =
       3.5f * sinf(TWO_PI_F * time_seconds / 18.0f) +
       1.5f * sinf(TWO_PI_F * time_seconds / 7.0f);
+  /* Keep the rounded DBC torque within -2..+2 at every vehicle speed. */
   sim_steering_column_torque =
-      75.0f * sinf(TWO_PI_F * time_seconds / 13.0f) +
-      25.0f * sinf(TWO_PI_F * time_seconds / 5.0f);
+      1.0f * sinf(TWO_PI_F * time_seconds / 13.0f) +
+      0.5f * sinf(TWO_PI_F * time_seconds / 5.0f);
 
   speed_fl_raw = (int32_t)lroundf(sim_wheel_speed_fl_kph / 0.03125f);
   speed_fr_raw = (int32_t)lroundf(sim_wheel_speed_fr_kph / 0.03125f);
