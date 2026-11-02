@@ -27,7 +27,9 @@ CAN 버스 양 끝에 각각 120-ohm 종단 저항을 둔다.
 
 ## STM32 → Gateway 센서 송신
 
-세 프레임을 20 ms마다 송신한다. 모든 신호는 Intel Little Endian이다.
+현재 사람 눈으로 프레임을 구분하기 위한 시험 설정으로 세 프레임을 5초마다
+송신한다. 실제 ADAS 통합 시 `CAN_SENSOR_PERIOD_MS`를 `20U`로 복구해야 한다.
+모든 신호는 Intel Little Endian이다.
 
 | CAN ID | Message | Signal generation |
 |---|---|---|
