@@ -1,0 +1,45 @@
+VERSION "Gateway test protocol 1.0"
+
+NS_ :
+    NS_DESC_
+    CM_
+    BA_DEF_
+    BA_
+    VAL_
+
+BS_:
+
+BU_: STM32 GATEWAY ADAS
+
+BO_ 902 WHL_SPD11: 8 STM32
+ SG_ WHL_SPD_FL : 0|14@1+ (0.03125,0) [0|511.96875] "km/h" GATEWAY
+ SG_ WHL_SPD_FR : 16|14@1+ (0.03125,0) [0|511.96875] "km/h" GATEWAY
+
+BO_ 688 SAS11: 5 STM32
+ SG_ SAS_Angle : 0|16@1- (0.1,0) [-3276.8|3276.7] "Deg" GATEWAY
+
+BO_ 593 MDPS12: 8 STM32
+ SG_ CR_Mdps_StrColTq : 0|11@1+ (1,-1024) [-1024|1023] "" GATEWAY
+
+BO_ 832 ADAS_STEER_CMD: 8 GATEWAY
+ SG_ TargetAngle : 0|16@1- (0.1,0) [-3276.8|3276.7] "Deg" STM32
+ SG_ TorqueLimit : 16|11@1+ (1,0) [0|200] "" STM32
+ SG_ ControlEnable : 27|1@1+ (1,0) [0|1] "" STM32
+ SG_ ControlReason : 28|4@1+ (1,0) [0|15] "" STM32
+ SG_ AliveCounter : 36|4@1+ (1,0) [0|15] "" STM32
+ SG_ Checksum : 48|8@1+ (1,0) [0|255] "" STM32
+
+BO_ 833 ADAS_SPEED_CMD: 8 GATEWAY
+ SG_ TargetSpeed : 0|14@1+ (0.03125,0) [0|511.96875] "km/h" STM32
+ SG_ DecelerationPercent : 16|8@1+ (1,0) [0|100] "%" STM32
+ SG_ ControlEnable : 24|1@1+ (1,0) [0|1] "" STM32
+ SG_ ControlReason : 25|4@1+ (1,0) [0|15] "" STM32
+ SG_ AliveCounter : 32|4@1+ (1,0) [0|15] "" STM32
+ SG_ Checksum : 48|8@1+ (1,0) [0|255] "" STM32
+
+VAL_ 832 ControlEnable 0 "Disabled" 1 "Enabled";
+VAL_ 833 ControlEnable 0 "Disabled" 1 "Enabled";
+
+CM_ BO_ 832 "Custom test steering command; checksum is fixed to zero.";
+CM_ BO_ 833 "Custom test speed command; checksum is fixed to zero.";
+
