@@ -38,7 +38,8 @@
 #define CAN_ID_STEERING_COMMAND  0x340U
 #define CAN_ID_SPEED_COMMAND     0x341U
 
-#define CAN_SENSOR_PERIOD_MS     20U
+/* Visual CAN test period. Restore to 20U for the final ADAS integration. */
+#define CAN_SENSOR_PERIOD_MS     5000U
 #define CAN_COMMAND_TIMEOUT_MS   100U
 #define CAN_MAX_DATA_LENGTH      8U
 #define TWO_PI_F                 6.28318530718f
