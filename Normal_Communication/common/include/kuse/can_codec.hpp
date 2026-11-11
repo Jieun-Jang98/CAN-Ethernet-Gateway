@@ -1,13 +1,10 @@
 #ifndef KUSE_CAN_CODEC_H
 #define KUSE_CAN_CODEC_H
 
-#include <stdbool.h>
-#include <stdint.h>
-#include "kuse/types.h"
+#include <cstdint>
+#include "kuse/types.hpp"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+namespace kuse {
 
 uint32_t kuse_can_get_unsigned_le(const uint8_t *data, uint8_t start_bit, uint8_t bit_length);
 int32_t kuse_can_get_signed_le(const uint8_t *data, uint8_t start_bit, uint8_t bit_length);
@@ -26,9 +23,7 @@ bool kuse_decode_lkas_enable(const uint8_t data[8]);
 void kuse_encode_lkas_fields(uint8_t data[8], kuse_torque_t torque, bool enable,
                              uint8_t counter);
 
-#ifdef __cplusplus
-}
-#endif
+} // namespace kuse
 
 #endif
 

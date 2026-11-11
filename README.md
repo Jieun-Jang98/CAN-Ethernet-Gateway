@@ -2,7 +2,7 @@
 
 ## 정상 통신 구현 — 공통 코드 (Stage 1)
 
-[Normal_Communication](Normal_Communication/README.md)에 정상 CAN–Ethernet 통신 구현을 위한 공통 헤더·소스 코드, 단위 테스트 및 빌드 설정을 정리했습니다. 현재 범위는 플랫폼 독립적인 공통 로직이며, 실제 CAN·UDP 송수신 프로그램은 포함하지 않습니다.
+[Normal_Communication](Normal_Communication/README.md)에 정상 CAN–Ethernet 통신 구현을 위한 C++17 공통 헤더(.hpp)·소스 코드(.cpp), 단위 테스트 및 빌드 설정을 정리했습니다. 현재 범위는 플랫폼 독립적인 공통 로직이며, 실제 CAN·UDP 송수신 프로그램은 포함하지 않습니다.
 
 
 ### CAN–Ethernet 양방향 보안 Gateway Prototype 구현 및 검증
@@ -235,4 +235,5 @@ Gateway는 CAN Signal을 Decoding하여 Ethernet Payload로 변환한 후 ADAS N
 **Step 3. Steering Command Generation**
 
 ADAS Node는 수신한 Vehicle State와 사전에 정의된 Steering Target을 기반으로 조향 제어 활성 여부를 판단하고 Steering Torque Command
+
 

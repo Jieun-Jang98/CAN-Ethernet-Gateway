@@ -1,24 +1,26 @@
-#include "kuse/protocol.h"
+#include "kuse/protocol.hpp"
+
+namespace kuse {
 
 uint16_t kuse_read_u16_be(const uint8_t bytes[2]) {
-    return (uint16_t)(((uint16_t)bytes[0] << 8) | bytes[1]);
+    return static_cast<uint16_t>(((static_cast<uint16_t>(bytes[0]) << 8) | bytes[1]));
 }
 
 int16_t kuse_read_i16_be(const uint8_t bytes[2]) {
-    return (int16_t)kuse_read_u16_be(bytes);
+    return static_cast<int16_t>(kuse_read_u16_be(bytes));
 }
 
 void kuse_write_u16_be(uint8_t bytes[2], uint16_t value) {
-    bytes[0] = (uint8_t)(value >> 8);
-    bytes[1] = (uint8_t)value;
+    bytes[0] = static_cast<uint8_t>((value >> 8));
+    bytes[1] = static_cast<uint8_t>(value);
 }
 
 void kuse_write_i16_be(uint8_t bytes[2], int16_t value) {
-    kuse_write_u16_be(bytes, (uint16_t)value);
+    kuse_write_u16_be(bytes, static_cast<uint16_t>(value));
 }
 
 int32_t kuse_round_half_away_from_zero(double value) {
-    return value >= 0.0 ? (int32_t)(value + 0.5) : (int32_t)(value - 0.5);
+    return value >= 0.0 ? static_cast<int32_t>((value + 0.5)) : static_cast<int32_t>((value - 0.5));
 }
 
 void kuse_encode_vehicle_state(const kuse_vehicle_state_t *state,
@@ -73,3 +75,5 @@ kuse_decode_status_t kuse_decode_steering_command(const uint8_t *data, size_t si
     return KUSE_DECODE_OK;
 }
 
+
+} // namespace kuse

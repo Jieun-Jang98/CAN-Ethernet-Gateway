@@ -46,3 +46,8 @@ driver override state, real SocketCAN/UDP I/O, STM32 HAL, and complete Gateway
 or ADAS programs are intentionally not implemented in Stage 1. Their constants
 and pure helpers needed by later stages are provided.
 
+
+## Implementation language
+
+The common library and both test programs use C++17. Headers use .hpp and implementation files use .cpp; public functions and data types belong to namespace kuse. Wire formats and calculation rules remain unchanged.
+

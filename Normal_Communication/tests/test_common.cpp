@@ -1,15 +1,17 @@
-#include "kuse/common.h"
-#include <stdio.h>
-#include <string.h>
+#include "kuse/common.hpp"
+#include <cstdio>
+#include <cstring>
+
+using namespace kuse;
 
 static int failures = 0;
 
 #define CHECK(expr) do { if (!(expr)) { \
-    fprintf(stderr, "FAIL %s:%d: %s\n", __FILE__, __LINE__, #expr); ++failures; \
+    std::fprintf(stderr, "FAIL %s:%d: %s\n", __FILE__, __LINE__, #expr); ++failures; \
 } } while (0)
 
 static void check_bytes(const uint8_t *actual, const uint8_t *expected, size_t size) {
-    CHECK(memcmp(actual, expected, size) == 0);
+    CHECK(std::memcmp(actual, expected, size) == 0);
 }
 
 static void test_udp_vectors(void) {
@@ -82,10 +84,10 @@ static void test_dbc_and_checks(void) {
     CHECK(kuse_whl_spd11_checksum_valid(data));
     data[0] ^= 1;
     CHECK(!kuse_whl_spd11_checksum_valid(data));
-    memset(data, 0, sizeof(data));
+    std::memset(data, 0, sizeof(data));
     kuse_encode_driver_torque(data, -200);
     CHECK(kuse_decode_driver_torque(data) == -200);
-    memset(data, 0, sizeof(data));
+    std::memset(data, 0, sizeof(data));
     kuse_encode_sas_angle_deci_deg(data, -123);
     CHECK(kuse_decode_sas_angle_deci_deg(data) == -123);
     CHECK(kuse_round_half_away_from_zero(2.5) == 3);
@@ -132,15 +134,15 @@ static void test_required_rate_sequences(void) {
     const kuse_torque_t crossing[] = {53,46,39,32,25,18,11,4,-3,-6};
     for (i = 1; i <= 20; ++i) {
         actual = kuse_torque_rate_limit(60, actual, 60).torque;
-        CHECK(actual == (kuse_torque_t)(i * 3));
+        CHECK(actual == static_cast<kuse_torque_t>((i * 3)));
     }
     actual = 60;
-    for (i = 0; i < (int)(sizeof(toward_zero) / sizeof(toward_zero[0])); ++i) {
+    for (i = 0; i < static_cast<int>((sizeof(toward_zero) / sizeof(toward_zero[0]))); ++i) {
         actual = kuse_torque_rate_limit(0, actual, 60).torque;
         CHECK(actual == toward_zero[i]);
     }
     actual = 60;
-    for (i = 0; i < (int)(sizeof(crossing) / sizeof(crossing[0])); ++i) {
+    for (i = 0; i < static_cast<int>((sizeof(crossing) / sizeof(crossing[0]))); ++i) {
         actual = kuse_torque_rate_limit(-60, actual, 60).torque;
         CHECK(actual == crossing[i]);
     }
@@ -155,7 +157,7 @@ int main(void) {
     test_torque();
     test_required_rate_sequences();
     if (failures != 0) return 1;
-    puts("All common tests passed.");
+    std::puts("All common tests passed.");
     return 0;
 }
 

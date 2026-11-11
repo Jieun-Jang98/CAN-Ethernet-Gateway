@@ -1,7 +1,7 @@
 #ifndef KUSE_CONSTANTS_H
 #define KUSE_CONSTANTS_H
 
-#include <stdint.h>
+#include <cstdint>
 
 #define KUSE_CONTROL_PERIOD_MS UINT32_C(20)
 #define KUSE_STATE_TIMEOUT_MS UINT32_C(100)

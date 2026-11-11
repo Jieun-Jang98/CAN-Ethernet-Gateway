@@ -1,14 +1,12 @@
 #ifndef KUSE_PROTOCOL_H
 #define KUSE_PROTOCOL_H
 
-#include <stddef.h>
-#include <stdint.h>
-#include "kuse/constants.h"
-#include "kuse/types.h"
+#include <cstddef>
+#include <cstdint>
+#include "kuse/constants.hpp"
+#include "kuse/types.hpp"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+namespace kuse {
 
 uint16_t kuse_read_u16_be(const uint8_t bytes[2]);
 int16_t kuse_read_i16_be(const uint8_t bytes[2]);
@@ -25,9 +23,7 @@ kuse_decode_status_t kuse_decode_steering_command(const uint8_t *data, size_t si
                                                    kuse_steering_command_t *command);
 int32_t kuse_round_half_away_from_zero(double value);
 
-#ifdef __cplusplus
-}
-#endif
+} // namespace kuse
 
 #endif
 

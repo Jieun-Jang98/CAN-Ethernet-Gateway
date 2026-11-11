@@ -12,12 +12,9 @@ executables.
 
 ```powershell
 cmake -S . -B build
-cmake --build build
-ctest --test-dir build --output-on-failure
+cmake --build build --config Release
+ctest --test-dir build -C Release --output-on-failure
 ```
 
-The public headers are C11-compatible and add `extern "C"` automatically when
-included from C++17.
-
-
+The common library and tests are implemented in C++17. Include `kuse/common.hpp` and use the `kuse` namespace. Public headers use `.hpp`; implementation files use `.cpp`.
 

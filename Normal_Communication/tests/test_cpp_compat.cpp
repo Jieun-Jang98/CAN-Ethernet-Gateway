@@ -1,4 +1,6 @@
-#include "kuse/common.h"
+#include "kuse/common.hpp"
+
+using namespace kuse;
 
 int main() {
     kuse_steering_command_t command{};
