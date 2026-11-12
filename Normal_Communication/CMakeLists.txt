@@ -82,3 +82,28 @@ if(BUILD_TESTING)
         COMMAND kuse_adas_tests
     )
 endif()
+
+find_package(Threads REQUIRED)
+
+add_executable(kuse_adas_node
+    adas/src/main.cpp
+)
+
+target_link_libraries(kuse_adas_node PRIVATE
+    kuse_adas
+    Threads::Threads
+)
+
+set_target_properties(kuse_adas_node PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+)
+
+if(MSVC)
+    target_compile_options(kuse_adas_node PRIVATE /W4 /WX)
+else()
+    target_compile_options(kuse_adas_node PRIVATE
+        -Wall -Wextra -Wpedantic -Werror
+    )
+endif()
