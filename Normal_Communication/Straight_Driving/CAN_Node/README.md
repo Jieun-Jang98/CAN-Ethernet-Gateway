@@ -12,11 +12,18 @@
 
 ## 프로젝트 구성
 
-`board/`는 기존 F446RE CubeMX 생성 프로젝트를 복사한 하드웨어 설정입니다. `board/Core/Src/main.c`의 USER CODE 영역에서 C++ `app_main_run`을 호출합니다. `app_main.cpp`가 HAL CAN 송수신을 담당하고 `straight_node.cpp`가 시나리오와 수신 검증을 담당합니다. 공통 CAN 신호 코덱과 CRC는 `../../common/`에서 직접 컴파일합니다.
+`board/`는 STM32CubeIDE에서 바로 가져올 수 있는 F446RE 프로젝트입니다. `board/Core/Src/main.c`의 USER CODE 영역에서 C++ `app_main_run`을 호출합니다. `board/Core/Src/app_main.cpp`가 HAL CAN 송수신을 담당하고 `straight_node.cpp`가 시나리오와 수신 검증을 담당합니다. CubeIDE 빌드에는 `board/Core/Inc/kuse/`와 `board/Core/Src/`에 복사한 공통 코덱을 포함합니다. 상위 `../../common/`을 수정할 때는 이 복사본도 동기화해야 합니다.
 
 보드 연결은 PB8=CAN1_RX, PB9=CAN1_TX, CANH/CANL, 공통 GND와 버스 양 끝 120 Ω 종단입니다. SN65HVD230 전원과 입출력 레벨은 모듈 사양을 따르세요. `board/KUSE_Straight_CAN.ioc`는 84 MHz 시스템 클록과 42 MHz APB1에서 CAN prescaler 6, BS1 11 TQ, BS2 2 TQ로 500 kbps를 설정합니다.
 
-## 빌드
+## STM32CubeIDE에서 실행
+
+1. NUCLEO-F446RE를 ST-LINK USB로 연결합니다.
+2. STM32CubeIDE의 **File > Open Projects from File System...**에서 이 폴더의 `board/`를 선택해 `KUSE_Straight_CAN` 프로젝트를 가져옵니다.
+3. Project Explorer에서 프로젝트를 선택하고 **Project > Build Project**를 실행합니다. Console에 오류가 없고 `Debug/KUSE_Straight_CAN.elf`가 생성되는지 확인합니다.
+4. **Run > Run As > STM32 C/C++ Application**으로 보드에 기록하고 실행합니다. 디버거 Watch 변수를 보려면 **Debug As > STM32 C/C++ Application**을 선택하고 Resume을 누릅니다.
+
+## CMake 대체 빌드
 
 STM32CubeIDE의 ARM GNU 도구가 `PATH`에 있는 환경에서:
 

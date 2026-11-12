@@ -28,8 +28,8 @@ add_executable(KUSE_Straight_CAN.elf
     ${ROOT}/common/src/can_codec.cpp
     ${ROOT}/common/src/checks.cpp
     ${ROOT}/common/src/protocol.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/straight_node.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/app_main.cpp
+    ${BOARD}/Core/Src/straight_node.cpp
+    ${BOARD}/Core/Src/app_main.cpp
 )
 
 target_include_directories(KUSE_Straight_CAN.elf PRIVATE

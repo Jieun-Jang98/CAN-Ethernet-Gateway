@@ -36,10 +36,10 @@ if(BUILD_TESTING)
 
     add_executable(kuse_straight_node_tests
         tests/test_straight_node.cpp
-        Straight_Driving/CAN_Node/straight_node.cpp
+        Straight_Driving/CAN_Node/board/Core/Src/straight_node.cpp
     )
     target_link_libraries(kuse_straight_node_tests PRIVATE kuse_common)
-    target_include_directories(kuse_straight_node_tests PRIVATE Straight_Driving/CAN_Node)
+    target_include_directories(kuse_straight_node_tests PRIVATE Straight_Driving/CAN_Node/board/Core/Inc)
     set_target_properties(kuse_straight_node_tests PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
     add_test(NAME kuse_straight_node_tests COMMAND kuse_straight_node_tests)
 endif()

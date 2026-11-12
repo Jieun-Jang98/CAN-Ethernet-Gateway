@@ -2,3 +2,6 @@
 *.obj
 *.pdb
 /Straight_Driving/CAN_Node/build/
+/Straight_Driving/CAN_Node/board/Debug/
+/Straight_Driving/CAN_Node/board/Release/
+/Straight_Driving/CAN_Node/board/.settings/
