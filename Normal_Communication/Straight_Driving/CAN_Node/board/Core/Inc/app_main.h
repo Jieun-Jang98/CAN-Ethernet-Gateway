@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-void app_main_run(CAN_HandleTypeDef *hcan);
+void app_main_run(CAN_HandleTypeDef *hcan, UART_HandleTypeDef *huart);
 
 #ifdef __cplusplus
 }
