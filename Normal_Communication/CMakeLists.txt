@@ -35,3 +35,49 @@ if(BUILD_TESTING)
     add_test(NAME kuse_cpp_header_test COMMAND kuse_cpp_header_test)
 endif()
 
+add_library(kuse_adas STATIC
+    adas/src/adas_controller.cpp
+)
+
+target_include_directories(kuse_adas PUBLIC
+    adas/include
+)
+
+target_link_libraries(kuse_adas PUBLIC
+    kuse_common
+)
+
+set_target_properties(kuse_adas PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+)
+
+if(MSVC)
+    target_compile_options(kuse_adas PRIVATE /W4 /WX)
+else()
+    target_compile_options(kuse_adas PRIVATE
+        -Wall -Wextra -Wpedantic -Werror
+    )
+endif()
+
+if(BUILD_TESTING)
+    add_executable(kuse_adas_tests
+        tests/test_adas.cpp
+    )
+
+    target_link_libraries(kuse_adas_tests PRIVATE
+        kuse_adas
+    )
+
+    set_target_properties(kuse_adas_tests PROPERTIES
+        CXX_STANDARD 17
+        CXX_STANDARD_REQUIRED ON
+        CXX_EXTENSIONS OFF
+    )
+
+    add_test(
+        NAME kuse_adas_tests
+        COMMAND kuse_adas_tests
+    )
+endif()
