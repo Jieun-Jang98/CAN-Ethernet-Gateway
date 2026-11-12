@@ -2,11 +2,10 @@
 
 이 프로젝트는 CAN–Ethernet 게이트웨이의 정상 통신 동작을 구현하기 위한 프로젝트입니다. 공통 메시지 형식, CAN 데이터 인코딩·디코딩, 데이터 검증 및 토크 계산 로직을 포함합니다.
 
-현재 1단계 구현 범위는 플랫폼 독립적인 공통 코드와 단위 테스트입니다. 실제 CAN·UDP 송수신 및 STM32·Gateway·ADAS 실행 프로그램은 이후 단계에서 구현할 예정입니다.
+공통 코드와 단위 테스트 외에 직진 보조 시나리오용 STM32 CAN 노드가 `Straight_Driving/CAN_Node/`에 있습니다. Gateway·ADAS 실행 프로그램은 아직 포함하지 않습니다.
 
-Stage 1 contains only platform-independent common code and unit tests. It does
-not open CAN or UDP sockets and does not contain STM32 HAL, Gateway, or ADAS
-executables.
+The STM32 node sends Classical CAN status frames and receives LKAS11 through
+HAL CAN1. See `Straight_Driving/CAN_Node/README.md` for its build and board setup.
 
 ## Build
 

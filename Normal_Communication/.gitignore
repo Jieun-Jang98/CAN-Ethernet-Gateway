@@ -1,4 +1,4 @@
 /build*/
 *.obj
 *.pdb
-
+/Straight_Driving/CAN_Node/build/
