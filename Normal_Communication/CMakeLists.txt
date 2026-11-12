@@ -37,6 +37,7 @@ endif()
 
 add_library(kuse_adas STATIC
     adas/src/adas_controller.cpp
+    adas/src/udp_transport.cpp
 )
 
 target_include_directories(kuse_adas PUBLIC
